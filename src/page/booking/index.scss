@@ -1,0 +1,109 @@
+@import '../../App.scss';
+
+.booking{
+  width: 100vw;
+  height: 40vw;
+  background-color: $black-color;
+  @include flex;
+  font-family: $font-family-default;
+  
+  .container{
+    width: 45vw;
+    height: 12vw;
+    @include flex;
+    justify-content: space-between;
+    background-color: $white-color;
+    border-radius: .5vw;
+    
+    .info{
+      @include flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      height: 100%;
+      width: 35%;
+      padding: 1.2vw;
+
+      #back-btn{
+        @include flex;
+        justify-content: flex-start;
+        width: 4vw;
+        cursor: pointer;
+        padding: .3vw 0 .3vw 0;
+        border: none;
+        background-color: $white-color ;
+        column-gap: .4vw;
+        color: $orange-color;
+
+        img{
+          width: 1vw;
+          filter: $red-color-filter;
+        }
+      }
+
+      div{
+        p{
+          font-size: $font-size-small;
+        }
+  
+        h1{
+          font-size: $font-size-large;
+        }
+      }
+
+      span{
+        @include flex;
+        font-size: $font-size-small;
+        column-gap: .5vw;
+        img{
+          width: 1vw;
+        }
+      }
+
+    }
+
+    .options{
+      @include flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.2vw;
+      width: 65%;
+      height: 100%;
+
+      p{
+        font-size: $font-size-normal;
+        padding: .1vw 0;
+      }
+
+      ul{
+        @include flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        height: 100%;
+
+          li{
+            width: 30%;
+            height: 90%;
+
+            button{
+              @include flex;
+              flex-direction: column;
+              height: 100%;
+              width: 100%;
+              background-color: $orange-color;
+              border: none;
+              border-radius: .5vw;
+              cursor: pointer;
+
+              img{
+                width: 2.5vw;
+              }
+            }
+          }
+      }
+
+    }
+
+  }
+}

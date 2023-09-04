@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+}
+
+/// mixins 
+@mixin flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin grid {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+// font faces
+@font-face {
+    font-family: 'Urbanist', sans-serif;;
+    src: url("./assets/fonts/Urbanist/Urbanist-VariableFont_wght.ttf") format('ttf');
+}
+
+
+
+// font variables
+$font-family-default: 'Urbanist', sans-serif;
+// font-size
+$font-size-smaller: 0.8vw;
+$font-size-small: 0.9vw;
+$font-size-normal: 1.2vw;
+$font-size-large: 2vw;
+
+
+
+//color variables
+$black-color: #000;
+$blue-color: #023C77;
+$blue-color-filter: invert(16%) sepia(32%) saturate(5567%) hue-rotate(198deg) brightness(89%) contrast(98%); 
+$grey-color: #888;
+$grey-p-color: #bbb;
+$grey-color-filter: invert(75%) sepia(2%) saturate(17%) hue-rotate(45deg) brightness(110%) contrast(91%);
+$blue-input-color: #0f467e;
+$blue-border-color: #1b4f84;
+$blue-border-color-filter: invert(20%) sepia(51%) saturate(2245%) hue-rotate(191deg) brightness(94%) contrast(83%);
+$blue-placeholder-color: #95adc5;
+$blue-placeholder-color-filter: invert(72%) sepia(17%) saturate(409%) hue-rotate(169deg) brightness(91%) contrast(94%);;
+$blue-button-color: #1c4f84;
+$light-blue-input-color: #ccd5dd;
+$light-blue-color: #59D3C2;
+$light-blue-color-about: #e6f9f7;
+$light-blue-color-filter: invert(79%) sepia(8%) saturate(2644%) hue-rotate(120deg) brightness(102%) contrast(72%);
+$light-grey-color: #eee;
+$light-grey-color-filter: invert(91%) sepia(0%) saturate(468%) hue-rotate(137deg) brightness(115%) contrast(87%);;
+$orange-color: #fa6f61;
+$red-color-filter:invert(17%) sepia(100%) saturate(7151%) hue-rotate(2deg) brightness(105%) contrast(115%);
+$white-color: #fff;
+$white-color-filter: brightness(0) invert(1);
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+    background-color: $black-color;
+}

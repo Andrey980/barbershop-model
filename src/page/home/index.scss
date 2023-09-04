@@ -1,0 +1,55 @@
+@import "../../App.scss";
+
+.home{
+  @include flex;
+  font-family: $font-family-default;
+  flex-direction: column;
+  width: 100vw;
+  row-gap: 2vw;
+  padding-top: 2vw;
+
+    img{
+      width: 27vw;
+    }
+
+    .container{
+      width: 27vw;
+
+        ul{
+          @include flex;
+          flex-direction: column;
+          row-gap: .7vw;
+
+            .itens {
+              width: 100%;
+              
+                button{
+                  @include flex;
+                  justify-content: space-between;
+                  width: 100%;
+                  padding: 1.2vw 1vw;
+                  border: none;
+                  border-radius: .5vw;
+                  background-color: $blue-color;
+                  color: $white-color;
+                  text-transform: uppercase;
+                  cursor: pointer;
+
+                      img{
+                        width: 2vw;
+                        height: 1vw;
+                      }
+
+                      span{
+                        color: $white-color;
+                        font-size: $font-size-smaller;
+                        text-transform: none;
+                        @include flex;
+                      }
+
+                    }
+              }
+        }
+      }
+
+}

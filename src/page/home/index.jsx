@@ -1,0 +1,115 @@
+import './index.scss'
+import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import Logo from './assets/logo-example.png'
+import RightArrow from './assets/right-arrow.svg'
+
+import { fetchData } from '../../api/fetchApi'
+
+function Home() {
+  const navigate = useNavigate()
+
+  const afterClick = e => {
+    const serviceId = e.target.value
+
+    if (serviceId != null) {
+      navigate(`/${serviceId}`)
+    }
+
+    console.log(serviceId)
+  }
+
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const result = await fetchData()
+        setData(result)
+      } catch (error) {
+        // Trate os erros, se necessário
+        setError(error)
+      }
+    }
+
+    getData()
+  }, [])
+
+  return (
+    <div className="home">
+      {data ? (
+        <div>
+          <img src={Logo} alt="" />
+          <div className="container">
+            <ul>
+              {data.services.map(result => (
+                <li className="itens">
+                  <button onClick={afterClick} value="0">
+                    {result}
+                    <span>
+                      60 min
+                      <img src={RightArrow} alt="" />
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        error
+      )}
+    </div>
+  )
+}
+
+export default Home
+
+{
+  /* <result>
+              <div className="container">
+                <ul>
+                  <li className="itens">
+                    <button onClick={afterClick} value="0">
+                      Barba
+                      <span>
+                        60 min
+                        <img src={RightArrow} alt="" />
+                      </span>
+                    </button>
+                  </li>
+
+                  <li className="itens">
+                    <button onClick={afterClick} value="1">
+                      Cabelo
+                      <span>
+                        60 min
+                        <img src={RightArrow} alt="" />
+                      </span>
+                    </button>
+                  </li>
+
+                  <li className="itens">
+                    <button onClick={afterClick} value="2">
+                      Cabelo e Barba
+                      <span>
+                        60 min
+                        <img src={RightArrow} alt="" />
+                      </span>
+                    </button>
+                  </li>
+
+                  <li className="itens">
+                    <button onClick={afterClick} value="3">
+                      Sobrancelhas
+                      <span>
+                        15 min
+                        <img src={RightArrow} alt="" />
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </result> */
+}
