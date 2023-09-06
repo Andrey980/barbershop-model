@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function useFetch(url, method, body = null) {
     const [data, setData] = useState(null);
@@ -19,7 +19,7 @@ export default function useFetch(url, method, body = null) {
                 const response  = await fetch(url, options);
                 const data  = await response.json();
 
-                if (response.status !== 200) {
+                if (! response.ok) {
                     throw new Error(data.message || "Error in fetching data");
                 }
 

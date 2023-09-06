@@ -5,15 +5,18 @@ import Home from './pages/home';
 import Professional from './pages/professional';
 import Booking from './pages/booking';
 import RestrictedRoutes from './routes/RestrictedRoutes';
+import LoginProvider from './context/loginContext';
 
 function App() {
   return (
     <BrowserRouter className="app">
-      <Routes>
-          <Route element={<RestrictedRoutes />}>
-            <Route path='' element={<Home />}></Route>
-          </Route>
-      </Routes>
+      <LoginProvider>
+        <Routes>
+            <Route element={<RestrictedRoutes />}>
+              <Route path='/:store' element={<Home />}></Route>
+            </Route>
+        </Routes>
+      </LoginProvider>
     </BrowserRouter>
   )
 }
