@@ -1,17 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.scss'
 
-import Home from './page/home'
-import Professional from './page/professional'
-import Booking from './page/booking'
+import Home from './pages/home';
+import Professional from './pages/professional';
+import Booking from './pages/booking';
+import RestrictedRoutes from './routes/RestrictedRoutes';
 
 function App() {
   return (
     <BrowserRouter className="app">
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:serviceId" element={<Professional />} />
-        <Route path="/:serviceId/:userId" element={<Booking />} />
+          <Route element={<RestrictedRoutes />}>
+            <Route path='' element={<Home />}></Route>
+          </Route>
       </Routes>
     </BrowserRouter>
   )
