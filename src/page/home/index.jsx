@@ -19,6 +19,20 @@ function Home() {
     console.log(serviceId)
   }
 
+  const checkValue = e => {
+    switch (e) {
+      case 'barba':
+        return '1'
+        break
+      case 'cabelo':
+        return '2'
+        break
+
+      default:
+        return null
+    }
+  }
+
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
 
@@ -44,8 +58,8 @@ function Home() {
           <div className="container">
             <ul>
               {data.services.map(result => (
-                <li className="itens">
-                  <button onClick={afterClick} value="0">
+                <li className="itens" key={result}>
+                  <button onClick={afterClick} value={result}>
                     {result}
                     <span>
                       60 min

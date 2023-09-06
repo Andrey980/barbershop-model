@@ -6,32 +6,32 @@ import Clock from './assets/clock.svg'
 import Person from './assets/person.svg'
 import PersonGroup from './assets/personGroup.svg'
 
+import { fetchData } from '../../api/fetchApi'
+
 function Professional() {
-  const [service, setService] = useState('Olá')
+  const [data, setData] = useState()
+  const [error, setError] = useState()
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const result = await fetchData()
+        setData(result)
+      } catch (error) {
+        // Trate os erros, se necessário
+        setError(error)
+      }
+    }
+
+    getData()
+  }, [])
+
+  const [service, setService] = useState([])
+
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
 
   const { serviceId } = useParams()
-  const serviceValue = Number(serviceId)
-
-  useEffect(() => {
-    switch (serviceValue) {
-      case 0:
-        setService('Barba')
-        break
-      case 1:
-        setService('Cabelo')
-        break
-      case 2:
-        setService('Cabelo e Barba')
-        break
-      case 3:
-        setService('Sobrancelhas')
-        break
-      default:
-        setService('Olá')
-    }
-  }, [serviceValue])
 
   const afterClick = e => {
     const userId = e.target.value
@@ -45,50 +45,95 @@ function Professional() {
     navigate(`/`)
   }
 
+  const findAttendantsByService = (array, service) => {
+    const attendants = array
+      .filter(item => item.service === service)
+      .map(item => item.attendant)
+
+    return attendants
+  }
+
+  const checkAttendant = (e, attendant) => {
+    if (Array.isArray(e)) {
+      e.forEach(item => {
+        setService(prevState => [
+          ...prevState,
+          { attendant: attendant, service: item.name }
+        ])
+      })
+    } else {
+      console.log('A variável não é um array válido.')
+    }
+  }
+
+  const removeDuplicates = array => {
+    return array.filter((item, index) => array.indexOf(item) === index)
+  }
+
+  const attendantsWithService = findAttendantsByService(service, serviceId)
+
+  const attendant = removeDuplicates(attendantsWithService)
+
+  console.log(attendant)
+
+  useEffect(() => {
+    if (data) {
+      for (let i = 0; i < data.services_data.length; i++) {
+        checkAttendant(
+          data.services_data[i].service,
+          data.services_data[i].attendant
+        )
+      }
+    }
+  }, [data])
+
+  // console.log(data.services_data.length)
+
   return (
     <div className="professional">
-      <div className="container">
-        <div className="info">
-          <button id="back-btn" onClick={backClick}>
-            <img src={LeftArrow} />
-            Back
-          </button>
+      {data ? (
+        <div className="container">
+          <div className="info">
+            <button id="back-btn" onClick={backClick}>
+              <img src={LeftArrow} />
+              Back
+            </button>
 
-          <div>
-            <p>BLUNT BARBER SHOP</p>
-            <h1>{service}</h1>
+            <div>
+              <p>BLUNT BARBER SHOP</p>
+              <h1>{serviceId}</h1>
+            </div>
+
+            <span>
+              <img src={Clock} />
+              60 min
+            </span>
           </div>
 
-          <span>
-            <img src={Clock} />
-            60 min
-          </span>
-        </div>
+          <div className="options">
+            <p>Select the professional</p>
+            <ul>
+              <li>
+                <button onClick={afterClick} value="0">
+                  <img src={PersonGroup} />
+                  <p>Any person</p>
+                </button>
+              </li>
 
-        <div className="options">
-          <p>Select the professional</p>
-          <ul>
-            <li>
-              <button onClick={afterClick} value="0">
-                <img src={PersonGroup} />
-                <p>Any person</p>
-              </button>
-            </li>
-            <li>
-              <button onClick={afterClick} value="1">
-                <img src={Person} />
-                <p>José</p>
-              </button>
-            </li>
-            <li>
-              <button onClick={afterClick} value="2">
-                <img src={Person} />
-                <p>Osvaldo</p>
-              </button>
-            </li>
-          </ul>
+              {attendant.map(item => (
+                <li key={item}>
+                  <button onClick={afterClick} value="1">
+                    <img src={Person} />
+                    <p>{item}</p>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
+      ) : (
+        error
+      )}
     </div>
   )
 }

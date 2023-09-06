@@ -34,8 +34,8 @@ function Booking() {
     navigate(`/${serviceId}`)
   }
 
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
+  const [data, setData] = useState()
+  const [error, setError] = useState()
 
   useEffect(() => {
     async function getData() {
