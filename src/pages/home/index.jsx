@@ -9,8 +9,10 @@ function Home() {
   const { store } = useParams()
   const navigate = useNavigate()
   const { data, error } = useFetch(
-    `https://virtual-agenda-a31dbadb2002.herokuapp.com/public/${store}`,
+    `https://virtual-agenda-a31dbadb2002.herokuapp.com/public/blunt`,
     'GET'
+    // `https://virtual-agenda-a31dbadb2002.herokuapp.com/public/${store}`,
+    // 'GET'
   )
   console.log(data)
 
