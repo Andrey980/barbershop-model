@@ -5,12 +5,14 @@ import Logo from './assets/logo-example.png'
 import RightArrow from './assets/right-arrow.svg'
 import useFetch from '../../hooks/useFetch'
 
-
 function Home() {
-  const { store } = useParams(); 
-  const navigate = useNavigate();
-  const { data, error } = useFetch(`https://virtual-agenda-a31dbadb2002.herokuapp.com/public/${store}`, "GET");
-  console.log(data);
+  const { store } = useParams()
+  const navigate = useNavigate()
+  const { data, error } = useFetch(
+    `https://virtual-agenda-a31dbadb2002.herokuapp.com/public/${store}`,
+    'GET'
+  )
+  console.log(data)
 
   const afterClick = e => {
     const serviceId = e.target.value
@@ -20,20 +22,6 @@ function Home() {
     }
 
     console.log(serviceId)
-  }
-
-  const checkValue = e => {
-    switch (e) {
-      case 'barba':
-        return '1'
-        break
-      case 'cabelo':
-        return '2'
-        break
-
-      default:
-        return null
-    }
   }
 
   return (
