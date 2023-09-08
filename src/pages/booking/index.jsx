@@ -3,38 +3,51 @@ import './index.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 import LeftArrow from './assets/leftArrow.svg'
 import Clock from './assets/clock.svg'
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
-import format from 'date-fns/format'
-import parse from 'date-fns/parse'
-import startOfWeek from 'date-fns/startOfWeek'
-import getDay from 'date-fns/getDay'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-import DatePicker from 'react-datepicker'
-import useFetch from "../../hooks/useFetch";
+
+import useFetch from '../../hooks/useFetch'
 
 function Booking() {
   const navigate = useNavigate()
-  const { serviceId } = useParams();
-  const { data } = useFetch();
-
-
-  const locales = {
-    'en-US': 'date-fns/locale/en-US'
-  }
-
-  const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek,
-    getDay,
-    locales
-  })
+  const { serviceId } = useParams()
+  const { data } = useFetch()
 
   const backClick = () => {
     navigate(`/${serviceId}`)
   }
 
-  // console.log(data)
+  // --------- Calendário -----------
+  const [currentYear, setCurrentYear] = useState(2023)
+
+  const month = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ]
+  moment.updateLocale('pt', {
+    months: [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro'
+    ]
+  })
 
   return (
     <div className="booking">
@@ -57,14 +70,7 @@ function Booking() {
             </span>
           </div>
 
-          <div className="options">
-            {/* <Calendar
-                  localizer={localizer}
-                  events={data}
-                  startAccessor="start"
-                  endAccessor="end"
-                /> */}
-          </div>
+          <div className="options"></div>
         </div>
       ) : (
         error
