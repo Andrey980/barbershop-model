@@ -14,6 +14,7 @@ function App() {
         <Routes>
             <Route element={<RestrictedRoutes />}>
               <Route path='/:store' element={<Home />}></Route>
+              <Route path='' element={"not found"}></Route>
             </Route>
         </Routes>
       </LoginProvider>
